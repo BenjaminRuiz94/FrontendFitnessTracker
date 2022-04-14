@@ -1,3 +1,4 @@
+
 // You can choose to import all your functions, and re-export them here
 const BASE_URL = "https://fitnesstrac-kr.herokuapp.com/api";
 
@@ -134,7 +135,44 @@ export const updateRoutine = async (token, routineId, name, goal, isPublic) => {
         isPublic,
       }),
     });
-    console.log(response, "this is our data");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteRoutine = async (token, routineId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines/${routineId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+export const addActivityToRoutine = async (token, routineId, activityId, count, duration) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines/${routineId}/activities`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        activityId,
+        count,
+        duration
+      })
+    });
     const data = await response.json();
     return data;
   } catch (error) {

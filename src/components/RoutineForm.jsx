@@ -49,15 +49,20 @@ const RoutineForm = ({
             setFormState({ ...formState, goal: e.target.value });
           }}
         />
-        <input
-          className="isPublic"
-          type="checkbox"
-          value={formState.isPublic}
-          placeholder="isPublic"
-          onChange={() => {
-            setFormState({ ...formState, isPublic: !formState.isPublic });
-          }}
-        />
+        <input 
+        type="text" />
+        <div>
+          Is this a public routine?
+          <input
+            className="isPublic"
+            type="checkbox"
+            value={formState.isPublic}
+            placeholder="isPublic"
+            onChange={() => {
+              setFormState({ ...formState, isPublic: !formState.isPublic });
+            }}
+          />
+        </div>
 
         <button className="newRoutineButton" type="submit">
           Submit Routine

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import EditRoutineForm from "./EditRoutineForm";
+import { deleteRoutine } from "../api";
 
 const SingleRoutine = ({
   allRoutines,
@@ -23,8 +24,8 @@ const SingleRoutine = ({
   } else {
     routineToRender = routine;
   }
-  console.log(routineToRender, "ROUTINE TO RENDER");
-  console.log(routineToRender.id, "ROUTINE TO RENDER ID");
+//   console.log(routineToRender, "ROUTINE TO RENDER");
+//   console.log(routineToRender.id, "ROUTINE TO RENDER ID");
   return (
     <>
       {routineToRender && routineToRender.id ? (
@@ -48,29 +49,38 @@ const SingleRoutine = ({
           </ol>
           <hr></hr>
           {routineToRender.creatorName === username ? (
-            <div className="editRoutine">
-              {editRoutineWanted ? (
-                <EditRoutineForm
-                  setEditRoutineWanted={setEditRoutineWanted}
-                  token={token}
-                  allRoutines={allRoutines}
-                  setAllRoutines={setAllRoutines}
-                  routineToRender={routineToRender}
-                  setUserRoutines={setUserRoutines}
-                  userRoutines={userRoutines}
-                />
-              ) : (
+            <div>
+              <div className="editRoutine">
+                {editRoutineWanted ? (
+                  <EditRoutineForm
+                    setEditRoutineWanted={setEditRoutineWanted}
+                    token={token}
+                    allRoutines={allRoutines}
+                    setAllRoutines={setAllRoutines}
+                    routineToRender={routineToRender}
+                    setUserRoutines={setUserRoutines}
+                    userRoutines={userRoutines}
+                  />
+                ) : (
+                  <button
+                    className="updateRoutineButton"
+                    onClick={() => {
+                      setEditRoutineWanted(true);
+                    }}
+                  >
+                    Edit
+                  </button>
+                )}
                 <button
-                  className="updateRoutineButton"
-                  onClick={() => {
-                    setEditRoutineWanted(true);
+                  className="deleteRoutineButton"
+                  onClick={async () => {
+                      deleteRoutine(token, routineToRender.id)
                   }}
                 >
-                  Edit
+                  Delete
                 </button>
-              )}
-
-              <hr></hr>
+                <hr></hr>
+              </div>
             </div>
           ) : null}
         </>

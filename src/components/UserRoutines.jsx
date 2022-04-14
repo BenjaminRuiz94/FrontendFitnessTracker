@@ -43,8 +43,8 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
       {userRoutines && userRoutines.length ? (
         userRoutines.map((routine, i) => {
           return (
-            <>
-              <div key={`userRoutine${i}`} className="userRoutine">
+            <div key={`userRoutine${i}`}>
+              <div  className="userRoutine">
                 <SingleRoutine
                   allRoutines={allRoutines}
                   routine={routine}
@@ -55,7 +55,7 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
                   userRoutines={userRoutines}
                 />
               </div>
-            </>
+            </div>
           );
         })
       ) : (
@@ -67,28 +67,3 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
 
 export default UserRoutines;
 
-/* 
-{msgBox.yes ? (
-              msgBox.idx == i ? (
-                <Message post={post} setMsgBox={setMsgBox} />
-              ) : (
-                <button
-                  className="msgButton1"
-                  onClick={() => {
-                    setMsgBox({ ...msgBox, idx: i });
-                  }}
-                >
-                  Send Message
-                </button>
-              )
-            ) : (
-              <button
-                className="msgButton2"
-                onClick={() => {
-                  setMsgBox({ ...msgBox, idx: i });
-                }}
-              >
-                Create Message
-              </button>
-            )}
-*/
