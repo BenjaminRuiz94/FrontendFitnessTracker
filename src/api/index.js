@@ -1,4 +1,3 @@
-
 // You can choose to import all your functions, and re-export them here
 const BASE_URL = "https://fitnesstrac-kr.herokuapp.com/api";
 
@@ -158,20 +157,66 @@ export const deleteRoutine = async (token, routineId) => {
   }
 };
 
-
-export const addActivityToRoutine = async (token, routineId, activityId, count, duration) => {
+export const addActivityToRoutine = async (
+  token,
+  routineId,
+  activityId,
+  count,
+  duration
+) => {
   try {
-    const response = await fetch(`${BASE_URL}/routines/${routineId}/activities`, {
+    const response = await fetch(
+      `${BASE_URL}/routines/${routineId}/activities`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          activityId,
+          count,
+          duration,
+        }),
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createActivity = async (name, description) => {
+  try {
+    const response = await fetch(`${BASE_URL}/activities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
+
       body: JSON.stringify({
-        activityId,
-        count,
-        duration
-      })
+        name,
+        description,
+      }),
+    });
+    console.log(response, "THIS IS OUR create Activity RESPONSE");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateActivity = async (name, description) => {
+  try {
+    const response = await fetch(`${BASE_URL}/activities/:activityId`, {
+      method: "PATCH",
+
+      body: JSON.stringify({
+        name,
+        description,
+      }),
     });
     const data = await response.json();
     return data;
