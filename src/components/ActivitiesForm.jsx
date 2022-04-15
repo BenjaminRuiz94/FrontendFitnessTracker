@@ -45,7 +45,6 @@ const ActivityForm = ({
             setFormState({ ...formState, description: e.target.value });
           }}
         />
-        <input type="text" />
 
         <button className="newActivityButton" type="submit">
           Submit activity

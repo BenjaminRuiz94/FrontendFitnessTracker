@@ -5,6 +5,8 @@ const EditActivitiesForm = ({
   allActivities,
   setAllActivities,
   setNewActivityWanted,
+  activity,
+  token
 }) => {
   const [formState, setFormState] = useState({
     name: "",
@@ -16,12 +18,15 @@ const EditActivitiesForm = ({
       onSubmit={async (e) => {
         e.preventDefault();
         const updatedActivity = await updateActivity(
-          formState.id,
+          token,
+          activity.id,
           formState.name,
           formState.description
         );
+        console.log(activity.id, "activity ID")
 
         const updatedActivities = allActivities.map((activity) => {
+          
           if (activity.id === updatedActivity.id) {
             return updatedActivity;
           } else {
