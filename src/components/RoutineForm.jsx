@@ -11,6 +11,7 @@ const RoutineForm = ({
     name: "",
     goal: "",
     isPublic: false,
+    activity: {}
   });
   return (
     <>
@@ -49,8 +50,6 @@ const RoutineForm = ({
             setFormState({ ...formState, goal: e.target.value });
           }}
         />
-        <input 
-        type="text" />
         <div>
           Is this a public routine?
           <input

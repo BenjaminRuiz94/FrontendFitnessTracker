@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import EditRoutineForm from "./EditRoutineForm";
+import AddActivityForm from "./AddActivityForm";
 import { deleteRoutine } from "../api";
 
 const SingleRoutine = ({
@@ -11,9 +12,12 @@ const SingleRoutine = ({
   setAllRoutines,
   setUserRoutines,
   userRoutines,
+  allActivities
 }) => {
   const { singleRoutineId } = useParams();
   const [editRoutineWanted, setEditRoutineWanted] = useState(false);
+  const [addActivity, setAddActivity] = useState(false);
+
   let routineToRender = null;
 
   if (singleRoutineId) {
@@ -24,8 +28,6 @@ const SingleRoutine = ({
   } else {
     routineToRender = routine;
   }
-  //   console.log(routineToRender, "ROUTINE TO RENDER");
-  //   console.log(routineToRender.id, "ROUTINE TO RENDER ID");
   return (
     <>
       {routineToRender && routineToRender.id ? (
@@ -49,7 +51,23 @@ const SingleRoutine = ({
           </ol>
           <hr></hr>
           {routineToRender.creatorName === username ? (
-            <div>
+            <div className="addActivityForm">
+              {addActivity ? (
+                <AddActivityForm
+                allActivities={allActivities}
+                routineToRender={routineToRender}
+                />
+              ) : (
+                <button
+                  className="addActivity"
+                  onClick={() => {
+                    setAddActivity(true);
+                  }}
+                >
+                  Add Activity
+                </button>
+              )}
+
               <div className="editRoutine">
                 {editRoutineWanted ? (
                   <EditRoutineForm

@@ -208,11 +208,14 @@ export const createActivity = async (name, description) => {
   }
 };
 
-export const updateActivity = async (name, description) => {
+export const updateActivity = async (token, activityId, name, description) => {
   try {
-    const response = await fetch(`${BASE_URL}/activities/:activityId`, {
+    const response = await fetch(`${BASE_URL}/activities/${activityId}`, {
       method: "PATCH",
-
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name,
         description,

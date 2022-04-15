@@ -5,8 +5,6 @@ import { updateRoutine } from "../api";
 const EditRoutineForm = ({
   setEditRoutineWanted,
   token,
-  allRoutines,
-  setAllRoutines,
   routineToRender,
   setUserRoutines,
   userRoutines,
@@ -29,8 +27,6 @@ const EditRoutineForm = ({
           formState.goal,
           formState.isPublic
         );
-        console.log(updatedRoutine);
-        // setAllRoutines([...allRoutines, updatedRoutine]);
         const updatedRoutines = userRoutines.map((routine) => {
           if (routine.id === updatedRoutine.id) {
             return updatedRoutine;

@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import EditActivitiesForm from "./EditActivitiesForm";
-import { getActivities } from "../api";
 import ActivityForm from "./ActivitiesForm";
 
-const Activities = () => {
-  const [allActivities, setAllActivities] = useState([]);
+const Activities = ({ token, allActivities, setAllActivities }) => {
   const [newActivityWanted, setNewActivityWanted] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getActivities();
-
-        setAllActivities(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+  
   return (
     <div>
       <ActivityForm
@@ -32,12 +19,14 @@ const Activities = () => {
               <div key={`activity ${i}`} className="activity">
                 <h1> {activity.name} </h1>
                 <h2> {activity.description} </h2>
-                <hr></hr>
+                
                 {newActivityWanted ? (
                   <EditActivitiesForm
                     allActivities={allActivities}
                     setAllActivities={setAllActivities}
                     setNewActivityWanted={setNewActivityWanted}
+                    activity={activity}
+                    token={token}
                   />
                 ) : (
                   <button
@@ -49,6 +38,7 @@ const Activities = () => {
                     Edit
                   </button>
                 )}
+                <hr></hr>
               </div>
             );
           })

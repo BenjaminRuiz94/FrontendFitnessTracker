@@ -3,7 +3,7 @@ import { getUserRoutines } from "../api";
 import RoutineForm from "./RoutineForm";
 import SingleRoutine from "./SingleRoutine";
 
-const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
+const UserRoutines = ({ token, username, allRoutines, setAllRoutines, allActivities }) => {
   const [userRoutines, setUserRoutines] = useState([]);
 
   const [newRoutineWanted, setNewRoutineWanted] = useState(false);
@@ -53,6 +53,7 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
                   token={token}
                   setUserRoutines={setUserRoutines}
                   userRoutines={userRoutines}
+                  allActivities={allActivities}
                 />
               </div>
             </div>
