@@ -24,8 +24,8 @@ const SingleRoutine = ({
   } else {
     routineToRender = routine;
   }
-//   console.log(routineToRender, "ROUTINE TO RENDER");
-//   console.log(routineToRender.id, "ROUTINE TO RENDER ID");
+  //   console.log(routineToRender, "ROUTINE TO RENDER");
+  //   console.log(routineToRender.id, "ROUTINE TO RENDER ID");
   return (
     <>
       {routineToRender && routineToRender.id ? (
@@ -74,7 +74,7 @@ const SingleRoutine = ({
                 <button
                   className="deleteRoutineButton"
                   onClick={async () => {
-                      deleteRoutine(token, routineToRender.id)
+                    deleteRoutine(token, routineToRender.id);
                   }}
                 >
                   Delete
